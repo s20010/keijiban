@@ -1,7 +1,7 @@
 "use strict";
 
 const router = require("express").Router()
-const HomeController = require("../controllers/HomeController")
+const HomeController = require("../controllers/homeController")
 
 router.get("/:category/new", HomeController.NewThread)
 router.post("/:category/create", HomeController.createThread, HomeController.redirectView)

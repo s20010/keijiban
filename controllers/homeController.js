@@ -1,12 +1,12 @@
 const mongoose = require(`mongoose`)
-const Thread = require("../models/thread")
+const Thread = require("../models/Thread")
 
 module.exports = {
     index: (req, res) => {
         res.render("index")
     },
     category: (req, res) => {
-        const category = req.params.categoly
+        const category = req.params.category
         res.locals.category = category
         Thread.find({ category: category })
             .then(threads => {
