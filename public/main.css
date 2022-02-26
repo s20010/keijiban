@@ -1,3 +1,10 @@
 h1 {
-    font-size: 60px;
+    font-size: 100px;
+    background-color: brown;
+    text-decoration-color: aliceblue;
+    text-align: center;
+}
+
+a {
+    font-size: 50px;
 }
