@@ -33,6 +33,19 @@ module.exports = {
             })
             .catch(error => {console.log("error")})
     },
+
+    thread: (req, res, next) => {
+        res.locals.messages = ["hello","yakiniku", "sakihama"]
+        res.render("thread")
+        res.render("thread")
+    },
+
+    newMessage: (req, res, next) => {
+        res.locals.category = req.params.category
+        res.locals.thread = req.params.thread
+        res.render("newMessage")
+    },
+
     redirectView: (req, res, next) => {
         const redirectPath = res.locals.redirect
         if(redirectPath !== undefined) res.redirect(redirectPath)
