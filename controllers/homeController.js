@@ -1,5 +1,6 @@
 const mongoose = require(`mongoose`)
 const Thread = require("../models/Thread")
+const messageSchema = require("../models/messageSchema")
 
 module.exports = {
     index: (req, res) => {
@@ -35,9 +36,33 @@ module.exports = {
     },
 
     thread: (req, res, next) => {
-        res.locals.messages = ["hello","yakiniku", "sakihama"]
-        res.render("thread")
-        res.render("thread")
+        const category = req.params.category
+        const thread = req.params.thread
+        const Message = mongoose.model(`${category}-${thread}`, messageSchema)
+        Message.find({})
+            .then( messages => {
+                res.locals.messages = messages
+                res.locals.category = category
+                res.locals.thread = thread
+              console.log(messages)
+                res.render("thread")
+            })
+    },
+
+    createMessage: (req, res, next) => {
+        const category = req.params.category
+        const thread = req.params.thread
+        const Message = mongoose.model(`${category}-${thread}`, messageSchema)
+        const params = {
+            message: req.body.message,
+            user: req.body.user
+        }
+        Message.create(params)
+            .then(() => {
+                console.log("successfully create new message")
+                res.locals.redirect = `/${category}/${thread}`
+                next()
+            })
     },
 
     newMessage: (req, res, next) => {
