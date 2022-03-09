@@ -1,3 +1,5 @@
+"use strict"
+
 const mongoose = require(`mongoose`)
 const Thread = require("../models/Thread")
 const messageSchema = require("../models/messageSchema")
